@@ -1,4 +1,5 @@
 import types from '../types';
+import authApi from '@/api/authApi';
 
 const menu = {
     state: {
@@ -7,6 +8,10 @@ const menu = {
         menuList:[]
     },
     actions: {
+        [types.VX_SIGN_IN]: ({commit}, userInfo) => {
+
+            commit();
+        },
         [types.VX_USER_MENU] : ({commit}, username) => {
 
             commit();

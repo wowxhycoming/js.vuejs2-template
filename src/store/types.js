@@ -3,6 +3,7 @@ const types = {
     VX_SIDERBAR_TOGGLE: 'VX_SIDERBAR_TOGGLE',
 
     // auth
+    VX_SIGN_IN: 'VX_SIGN_IN',
     VX_USER_MENU: 'VX_USER_MENU',
 
     // user
