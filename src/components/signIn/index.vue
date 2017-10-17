@@ -10,7 +10,7 @@
                     <i class="iconfont icon-all"></i>
                 </span>
                 <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on"
-                          placeholder="邮箱"></el-input>
+                          placeholder="邮箱"/>
             </el-form-item>
 
             <el-form-item prop="password">
@@ -19,11 +19,11 @@
                 </span>
                 <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password"
                           autoComplete="on"
-                          placeholder="密码"></el-input>
+                          placeholder="密码"/>
                 <span class='show-pwd' @click='showPwd'><i class="iconfont icon-all"></i></span>
             </el-form-item>
 
-            <el-button type="primary" style="width:100%;margin-bottom:30px;" :loading="loading"
+            <el-button v-waves type="primary" style="width:100%;margin-bottom:30px;" :loading="loading"
                        @click.native.prevent="handleLogin">登录
             </el-button>
 
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-    import {isvalidUsername} from '@/utils/validate'
+    import {isvalidUsername} from '@/utils/validate';
+    import types from '@/store/types';
 
     export default {
         name: 'login',
@@ -77,45 +78,19 @@
             handleLogin() {
                 this.$refs.loginForm.validate(valid => {
                     if(valid) {
-                        this.loading = true
-                        this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
-                            this.loading = false
-                            this.$router.push({path: '/'})
-                            // this.showDialog = true
+                        this.loading = true;
+                        this.$store.dispatch(types.VX_SIGN_IN, this.loginForm).then(() => {
+                            this.loading = false;
+                            this.$router.push({path: '/'});
                         }).catch(() => {
-                            this.loading = false
+                            this.loading = false;
                         })
                     } else {
-                        console.log('error submit!!')
-                        return false
+                        return false;
                     }
                 })
             },
-            afterQRScan() {
-                // const hash = window.location.hash.slice(1)
-                // const hashObj = getQueryObject(hash)
-                // const originUrl = window.location.origin
-                // history.replaceState({}, '', originUrl)
-                // const codeMap = {
-                //   wechat: 'code',
-                //   tencent: 'code'
-                // }
-                // const codeName = hashObj[codeMap[this.auth_type]]
-                // if (!codeName) {
-                //   alert('第三方登录失败')
-                // } else {
-                //   this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-                //     this.$router.push({ path: '/' })
-                //   })
-                // }
-            }
         },
-        created() {
-            // window.addEventListener('hashchange', this.afterQRScan)
-        },
-        destroyed() {
-            // window.removeEventListener('hashchange', this.afterQRScan)
-        }
     }
 </script>
 
