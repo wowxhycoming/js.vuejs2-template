@@ -14,12 +14,12 @@ Vue.use(ElementUI);
 Vue.use(waves);
 
 const whiteList = ['/signIn', '/authredirect', '/reset', '/sendpwd'];// 不重定向白名单
-const token = false; // 都放到 store 中， 在 beforeEach 中判断和更新 store 中数据->根据当前时间设置超时时间
-
+// 都放到 store 中， 在 beforeEach 中判断和更新 store 中数据->根据当前时间设置超时时间
 router.beforeEach((to, from, next) => {
     NProgress.start(); // 开启Progress
+    store.dispatch('VX_CONTINUE_TOKEN'); // 刷新token时间
 
-    if (token) { // 判断是否有token
+    if (store.getters.getToken) { // 判断是否有token
         if (to.path === '/signIn' || to.path === '/signUp') {
             next({ path: '/' });
         } else {

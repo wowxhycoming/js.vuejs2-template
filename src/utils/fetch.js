@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { Message } from 'element-ui';
+import conf from '@/conf'
+import {Message} from 'element-ui';
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: process.env.BASE_API, // api的base_url
-  timeout: 5000                  // 请求超时时间
+    baseURL: conf.serverIp + ':' + conf.serverPort,
+    timeout: 5000                  // 请求超时时间
 });
 
 

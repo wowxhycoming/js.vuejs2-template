@@ -2,6 +2,8 @@ const types = {
 
     // auth
     VX_SIGN_IN: 'VX_SIGN_IN',
+    VX_CONTINUE_TOKEN: 'VX_CONTINUE_TOKEN',
+
     VX_USER_MENU: 'VX_USER_MENU',
 
     // layout

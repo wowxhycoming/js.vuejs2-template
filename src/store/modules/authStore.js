@@ -10,7 +10,7 @@ const auth = {
     },
     actions: {
         [types.VX_SIGN_IN]: ({commit}, userInfo) => {
-            console.log(userInfo);
+            console.log('action userInfo=',userInfo);
             const username = userInfo.username.trim();
             const password = userInfo.password;
             return new Promise((resolve, reject) => {
@@ -22,8 +22,12 @@ const auth = {
                     reject(err);
                 });
             });
-
-            commit();
+        },
+        [types.VX_CONTINUE_TOKEN]: ({commit}) => {
+            return new Promise(resolve => {
+                commit(types.VX_CONTINUE_TOKEN);
+                resolve();
+            });
         },
         [types.VX_USER_MENU] : ({commit}, data) => {
 
@@ -36,6 +40,11 @@ const auth = {
             state.token = data.token;
             state.lastActionTime = new Date();
             state.menuList = data.menuList;
+        },
+        [types.VX_CONTINUE_TOKEN]: state => {
+            if(state.token !== '') {
+                state.lastActionTime = new Date();
+            }
         },
         [types.VX_USER_MENU]: state => {
 
