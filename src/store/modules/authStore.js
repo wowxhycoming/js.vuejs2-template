@@ -1,16 +1,20 @@
 import types from '../types';
 import {signIn} from '@/api/authApi';
+import {setStorage, getStorage} from '../local';
+
+const key = 'auth';
+const state = getStorage(key) || {
+        username: '',
+        token: '',
+        lastActionTime: '',
+        menuList: []
+    };
 
 const auth = {
-    state: {
-        username:'',
-        token:'',
-        lastActionTime:'',
-        menuList:[]
-    },
+    state: state,
     actions: {
         [types.VX_SIGN_IN]: ({commit}, userInfo) => {
-            console.log('action userInfo=',userInfo);
+            console.log('action userInfo=', userInfo);
             const username = userInfo.username.trim();
             const password = userInfo.password;
             return new Promise((resolve, reject) => {
@@ -29,7 +33,7 @@ const auth = {
                 resolve();
             });
         },
-        [types.VX_USER_MENU] : ({commit}, data) => {
+        [types.VX_USER_MENU]: ({commit}, data) => {
 
             commit();
         }
@@ -40,15 +44,18 @@ const auth = {
             state.token = data.token;
             state.lastActionTime = new Date();
             state.menuList = data.menuList;
+            setStorage(key, state);
         },
         [types.VX_CONTINUE_TOKEN]: state => {
             if(state.token !== '') {
                 state.lastActionTime = new Date();
+                setStorage(key, state);
             }
         },
         [types.VX_USER_MENU]: state => {
 
             state.menuList = [];
+            setStorage(key, state);
         }
     }
 };
