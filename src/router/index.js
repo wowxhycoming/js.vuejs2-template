@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '@/components/layout/Layout';
+
 const importComponent = fileName => () => import('@/components/' + fileName);
-import test from '@/components/test/test';
 
 Vue.use(Router);
 
@@ -13,10 +13,10 @@ export default new Router({
         {
             path: '/',
             component: Layout,
-            // redirect: '/dashboard',
+            redirect: '/dashboard',
             name: '首页',
             hidden: true,
-            // children: [{ path: 'dashboard', component: 'dashboard/index' }]
-        },
+            children: [{ path: 'dashboard', component: importComponent('test/test') }]
+        }
     ]
-})
+});
