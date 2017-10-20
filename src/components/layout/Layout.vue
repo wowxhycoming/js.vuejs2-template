@@ -1,22 +1,23 @@
 <template>
     <div class="app-wrapper" :class="{hideSidebar:!sidebarOpened}">
-        <sidebar class="sidebar-container"></sidebar>
-        <!--<div class="main-container">-->
-            <!--<navbar></navbar>-->
+        <Sidebar class="sidebar-container"></Sidebar>
+        <div class="main-container">
+            <Navbar></Navbar>
             <!--<app-main></app-main>-->
-        <!--</div>-->
+        </div>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
     import {Sidebar, /*Navbar, AppMain*/} from '@/components/layout';
+    import Navbar from './Navbar';
 
     export default {
         name: 'layout',
         components: {
             Sidebar,
-//            Navbar,
+            Navbar,
 //            AppMain
         },
         computed: {

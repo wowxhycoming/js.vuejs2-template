@@ -6,7 +6,7 @@ const types = {
 
     VX_USER_MENU: 'VX_USER_MENU',
 
-    // layout
+    // app
     VX_SIDERBAR_TOGGLE: 'VX_SIDERBAR_TOGGLE',
 
     // user

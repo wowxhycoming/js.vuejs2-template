@@ -4,7 +4,7 @@ import VuexPersistence from 'vuex-persist'
 
 import types from './types';
 import auth from './modules/authStore';
-import sidebar from './modules/sidebarStore';
+import app from './modules/appStore';
 import user from './modules/userStore';
 import calculate from './modules/calculateStore';
 
@@ -17,18 +17,22 @@ const vuexLocal = new VuexPersistence({
     key: 'system-name', // 存储到 storage 时所用的 key
     reducer: state => ({
         auth: state.auth,
+        app: state.app
     }),
     filter: (mutation) => (
+        // auth
         mutation.type === types.VX_CONTINUE_TOKEN ||
         mutation.type === types.VX_SIGN_IN ||
-        mutation.type === types.VX_USER_MENU
+        mutation.type === types.VX_USER_MENU ||
+        // app
+        mutation.type === types.VX_SIDERBAR_TOGGLE
     )
 });
 
 const store = new Vuex.Store({
     modules: {
         auth,
-        sidebar,
+        app,
         user,
         calculate
     },

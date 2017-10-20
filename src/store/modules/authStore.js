@@ -1,17 +1,7 @@
 import types from '../types';
 import {signIn} from '@/api/authApi';
-// import {setStorage, getStorage} from '../local';
-
-// const key = 'auth';
-// const state = getStorage(key) || {
-//         username: '',
-//         token: '',
-//         lastActionTime: '',
-//         menuList: []
-//     };
 
 const auth = {
-    // state: state,
     state: {
         username: '',
         token: '',
