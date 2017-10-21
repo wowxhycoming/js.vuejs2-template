@@ -9,6 +9,9 @@ import NProgress from 'nprogress'; // Progress 进度条
 import 'nprogress/nprogress.css';// Progress 进度条 样式
 import waves from './directive/waves';// 水波纹指令
 
+import {asyncRouterMap, notFoundRouterMap} from '@/router';
+import {levelMatch} from '@/utils';
+
 Vue.prototype.$http = axios;
 Vue.use(ElementUI);
 Vue.use(waves);
@@ -19,11 +22,30 @@ router.beforeEach((to, from, next) => {
     NProgress.start(); // 开启Progress
     store.dispatch('VX_CONTINUE_TOKEN'); // 刷新token时间
 
-    if (store.getters.getToken) { // 判断是否有token
+    console.log(store.getters.getToken);
+    if (store.getters.getToken) { // 判断是否有token, // TODO 并且还要token有效
         if (to.path === '/signIn' || to.path === '/signUp') {
             next({ path: '/' });
         } else {
-            next();
+            let menuList = store.getters.getMenuList;
+            // console.log('menuList1',menuList);
+            if(!(menuList instanceof Array) || menuList.length === 0) { // 在VUEX中，没有持久化的后台菜单
+                // console.log('menuList2',menuList);
+                store.dispatch('VX_GET_MENU', store.getters.getToken).then(() => {
+                    menuList = store.getters.getMenuList;
+                    const routerList = levelMatch(menuList, asyncRouterMap);
+                    console.log('routerList', JSON.stringify(routerList));
+                    router.addRoutes(routerList); // 动态添加可访问路由表
+                    router.addRoutes(notFoundRouterMap);
+                    next({ ...to });
+                }).catch(() => {
+                    store.dispatch('VX_SIGN_OUT').then(() => {
+                        next({path:'/signIn'});
+                    });
+                });
+            } else {
+                next();
+            }
         }
     } else {
         if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入

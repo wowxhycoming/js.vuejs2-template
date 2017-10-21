@@ -3,8 +3,8 @@ const types = {
     // auth
     VX_SIGN_IN: 'VX_SIGN_IN',
     VX_CONTINUE_TOKEN: 'VX_CONTINUE_TOKEN',
-
-    VX_USER_MENU: 'VX_USER_MENU',
+    VX_GET_MENU: 'VX_GET_MENU',
+    VX_SIGN_OUT: 'VX_SIGN_OUT',
 
     // app
     VX_SIDERBAR_TOGGLE: 'VX_SIDERBAR_TOGGLE',

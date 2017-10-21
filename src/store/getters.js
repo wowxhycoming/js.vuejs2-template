@@ -1,7 +1,8 @@
 export const getters = {
     // auth
     getToken: state => state.auth.token,
-
+    // menu
+    getMenuList: state => state.menu.menuList,
     // app
     getSidebarOpened: state => state.app.isOpened,
 

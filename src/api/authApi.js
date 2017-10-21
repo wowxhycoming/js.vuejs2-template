@@ -13,3 +13,10 @@ export function signIn(username, password) {
 
     return axios.post(domain + '/auth/signIn', data);
 }
+
+export function getMenuList(token) {
+    const data = {token};
+    console.log('api getMenu', data);
+
+    return axios.post(domain + '/auth/getMenuList', data);
+}
