@@ -10,7 +10,7 @@ import 'nprogress/nprogress.css';// Progress 进度条 样式
 import waves from './directive/waves';// 水波纹指令
 
 import {asyncRouterMap, notFoundRouterMap} from '@/router';
-import {levelMatch} from '@/utils';
+import {levelMatch,cryptLastActionTime} from '@/utils';
 
 Vue.prototype.$http = axios;
 Vue.use(ElementUI);
@@ -20,13 +20,19 @@ const whiteList = ['/signIn', '/authredirect', '/reset', '/sendpwd'];// 不重�
 // 都放到 store 中， 在 beforeEach 中判断和更新 store 中数据->根据当前时间设置超时时间
 router.beforeEach((to, from, next) => {
     NProgress.start(); // 开启Progress
-    store.dispatch('VX_CONTINUE_TOKEN'); // 刷新token时间
 
-    console.log(store.getters.getToken);
-    if (store.getters.getToken) { // 判断是否有token, // TODO 并且还要token有效
+    let isValidToken =
+        store.getters.getLastActionTimeCrypt ==
+        cryptLastActionTime(store.getters.getToken + store.getters.getLastActionTime)
+        ? true : false;
+
+    // 登录 并且 未超时
+    if (store.getters.getToken && isValidToken) { // 判断是否有token 并且 token有效
+        store.dispatch('VX_CONTINUE_TOKEN'); // 刷新token时间
         if (to.path === '/signIn' || to.path === '/signUp') {
             next({ path: '/' });
         } else {
+            // 页面刷新 或 通过地址栏直接访问url
             let menuList = store.getters.getMenuList;
             // console.log('menuList1',menuList);
             if(!(menuList instanceof Array) || menuList.length === 0) { // 在VUEX中，没有持久化的后台菜单

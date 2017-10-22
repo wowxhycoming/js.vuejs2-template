@@ -1,6 +1,8 @@
 export const getters = {
     // auth
     getToken: state => state.auth.token,
+    getLastActionTime: state => state.auth.lastActionTime,
+    getLastActionTimeCrypt: state => state.auth.lastActionTimeCrypt,
     // menu
     getMenuList: state => state.menu.menuList,
     // app

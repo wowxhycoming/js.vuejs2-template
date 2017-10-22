@@ -22,8 +22,8 @@ const vuexLocal = new VuexPersistence({
     }),
     filter: (mutation) => ( // 只要 filter 中的 mutation 被触发，所有 reduce 中的 state 都将被存储
         // // auth
-        mutation.type === types.VX_CONTINUE_TOKEN ||
         mutation.type === types.VX_SIGN_IN ||
+        mutation.type === types.VX_CONTINUE_TOKEN ||
         mutation.type === types.VX_SIGN_OUT ||
         // // app
         mutation.type === types.VX_SIDERBAR_TOGGLE

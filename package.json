@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt": "^1.0.3",
+    "crypto": "^1.0.1",
     "element-ui": "^1.4.6",
     "normalize.css": "^7.0.0",
     "nprogress": "^0.2.0",

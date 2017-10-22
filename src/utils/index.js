@@ -1,3 +1,6 @@
+// let crypto = require('crypto');
+import crypto from 'crypto';
+
 /**
  * 用于使用后台菜单过滤前台菜单
  *  用 refer 的相同层级过滤 array， 当对象内 name 属性相等时，过滤通过
@@ -22,6 +25,16 @@ export function levelMatch(refer, array) {
         }
     });
     return array
+}
+
+export function cryptLastActionTime(date) {
+    let sha1 = crypto.createHash('sha1');
+    sha1.update(date);
+    let crypt = sha1.digest('hex');
+    crypt = crypt.substring(1,crypt.length - 1); // 去掉首位
+    sha1.update(crypt);
+    crypt = sha1.digest('hex');
+    return crypt;
 }
 
 export function parseTime(time, cFormat) {
