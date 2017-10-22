@@ -1,16 +1,21 @@
 import types from '../types';
 import {signIn, getMenuList} from '@/api/authApi';
+import {constantRouterMap, asyncRouterMap, notFoundRouterMap} from '@/router';
+import {levelMatch,verifyToken} from '@/utils';
 
 const menu ={
     state: {
-        menuList:[]
+        menuList:[],
+        asyncPermissionRouterList:[],
+        allPermissionRouterList:[]
     },
     actions:{
         [types.VX_GET_MENU]: ({commit}, token) => {
             return new Promise((resolve, reject) => {
                 getMenuList(token).then(res => {
                     const menuList = res.data;
-                    commit(types.VX_GET_MENU, menuList);
+                    const asyncPermissionRouterList = levelMatch(menuList, asyncRouterMap).concat(notFoundRouterMap);
+                    commit(types.VX_GET_MENU, {menuList,asyncPermissionRouterList});
                     resolve();
                 }).catch(err => {
                     reject(err);
@@ -19,8 +24,10 @@ const menu ={
         },
     },
     mutations: {
-        [types.VX_GET_MENU]: (state, menuList) => {
-            state.menuList = menuList;
+        [types.VX_GET_MENU]: (state, data) => {
+            state.menuList = data.menuList;
+            state.asyncPermissionRouterList = data.asyncPermissionRouterList;
+            state.allPermissionRouterList = constantRouterMap.concat(data.asyncPermissionRouterList);
         }
     }
 }

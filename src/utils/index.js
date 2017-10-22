@@ -1,6 +1,7 @@
 // let crypto = require('crypto');
 import crypto from 'crypto';
 
+const maxSignMillisecond = 4 * 60 * 60 * 1000    /60/4; // 超时时间 4 小时
 /**
  * 用于使用后台菜单过滤前台菜单
  *  用 refer 的相同层级过滤 array， 当对象内 name 属性相等时，过滤通过
@@ -35,6 +36,18 @@ export function cryptLastActionTime(date) {
     sha1.update(crypt);
     crypt = sha1.digest('hex');
     return crypt;
+}
+
+export function verifyToken(token, time, timeCrypt) {
+    let isValid = timeCrypt == cryptLastActionTime(token + time) ? true : false;
+    if(isValid) {
+        let oldDate = new Date(time);
+        let nowDate = new Date();
+        if(nowDate - oldDate < maxSignMillisecond) {
+            return true
+        }
+    }
+    return false;
 }
 
 export function parseTime(time, cFormat) {
