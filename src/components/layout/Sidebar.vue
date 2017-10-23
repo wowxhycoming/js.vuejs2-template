@@ -1,6 +1,6 @@
 <template>
     <el-menu mode="vertical" theme="dark" unique-opened :default-active="$route.path" :collapse="isCollapse">
-        <sidebar-item :routes='allPermissionRouterList'></sidebar-item>
+        <sidebar-item :routes='getAllPermissionRouterList'></sidebar-item>
     </el-menu>
 </template>
 
@@ -11,9 +11,9 @@
     export default {
         components: {SidebarItem},
         computed: {
-            ...mapGetters(['getSidebarOpened','allPermissionRouterList']),
+            ...mapGetters(['getSidebarOpened','getAllPermissionRouterList']),
             isCollapse() {
-                console.log(this.allPermissionRouterList);
+                console.log(this.getAllPermissionRouterList);
                 return !this.getSidebarOpened;
             }
         }

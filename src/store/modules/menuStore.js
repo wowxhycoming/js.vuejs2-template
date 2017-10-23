@@ -6,7 +6,6 @@ import {levelMatch,verifyToken} from '@/utils';
 const menu ={
     state: {
         menuList:[],
-        asyncPermissionRouterList:[],
         allPermissionRouterList:[]
     },
     actions:{
@@ -14,8 +13,8 @@ const menu ={
             return new Promise((resolve, reject) => {
                 getMenuList(token).then(res => {
                     const menuList = res.data;
-                    const asyncPermissionRouterList = levelMatch(menuList, asyncRouterMap).concat(notFoundRouterMap);
-                    commit(types.VX_GET_MENU, {menuList,asyncPermissionRouterList});
+                    const allPermissionRouterList = constantRouterMap.concat(levelMatch(menuList, asyncRouterMap).concat(notFoundRouterMap));
+                    commit(types.VX_GET_MENU, {menuList,allPermissionRouterList});
                     resolve();
                 }).catch(err => {
                     reject(err);
@@ -26,8 +25,7 @@ const menu ={
     mutations: {
         [types.VX_GET_MENU]: (state, data) => {
             state.menuList = data.menuList;
-            state.asyncPermissionRouterList = data.asyncPermissionRouterList;
-            state.allPermissionRouterList = constantRouterMap.concat(data.asyncPermissionRouterList);
+            state.allPermissionRouterList = data.allPermissionRouterList;
         }
     }
 }

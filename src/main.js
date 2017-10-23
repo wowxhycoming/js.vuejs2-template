@@ -37,10 +37,10 @@ router.beforeEach((to, from, next) => {
             if(!(menuList instanceof Array) || menuList.length === 0) { // 在VUEX中，没有持久化的后台菜单
                 // console.log('menuList2',menuList);
                 store.dispatch('VX_GET_MENU', store.getters.getToken).then(() => {
-                    menuList = store.getters.getMenuList;
-                    console.log('getPermissionRouterList', store.getters.getPermissionRouterList); // TODO 到这里有打印
-                    router.addRoutes(store.getters.getPermissionRouterList); // 动态添加可访问路由表
-                    console.log('added routers'); // TODO 到这里没有打印
+                    // menuList = store.getters.getMenuList;
+                    console.log('getAllPermissionRouterList', store.getters.getAllPermissionRouterList);
+                    router.addRoutes(store.getters.getAllPermissionRouterList); // 动态添加可访问路由表
+                    console.log('added routers');
                     next({ ...to });
                 }).catch(() => {
                     store.dispatch('VX_SIGN_OUT').then(() => {
