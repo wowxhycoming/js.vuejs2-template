@@ -1,7 +1,7 @@
 // let crypto = require('crypto');
 import crypto from 'crypto';
 
-const maxSignMillisecond = 4 * 60 * 60 * 1000    /60/4; // 超时时间 4 小时
+const maxSignMillisecond = 4 * 60 * 60 * 1000    /*/60/4*/; // 超时时间 4 小时
 /**
  * 用于使用后台菜单过滤前台菜单
  *  用 refer 的相同层级过滤 array， 当对象内 name 属性相等时，过滤通过

@@ -20,7 +20,6 @@ export const constantRouterMap = [
     }
 ];
 
-
 export const asyncRouterMap = [
     {
         path: '/a',
@@ -44,22 +43,20 @@ export const asyncRouterMap = [
     {
         path: '/c',
         component: Layout,
-        redirect: '/c/index',
+        // redirect: 'noredirect',
         name: 'C',
         children: [
             {
-                path: 'index', component: importComponent('test/b/index'), name: 'C-index',
+                path: '/c/index', component: importComponent('test/c/index'), name: 'C-index',
                 children: [
-                    {path: 'indexc1', component: importComponent('test/c/indexc1'), name: 'C-index-c1'},
-                    {path: 'indexc2', component: importComponent('test/c/indexc2'), name: 'C-index-c2'},
+                    {path: 'c11', component: importComponent('test/c/indexc1'), name: 'C-index-c1'},
+                    {path: 'c12', component: importComponent('test/c/indexc2'), name: 'C-index-c2'},
                 ]
             },
             {path: 'c1', component: importComponent('test/c/c1'), name: 'C-c1'},
             {path: 'c2', component: importComponent('test/c/c2'), name: 'C-c2'}
         ]
-    },
-
-    // {path: '*', redirect: '/404', hidden: true}
+    }
 ];
 
 export const notFoundRouterMap = [

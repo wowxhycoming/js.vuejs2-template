@@ -36,6 +36,7 @@ const auth = {
                 data.lastActionTime = dateTime;
                 data.lastActionTimeCrypt = cryptLastActionTime(auth.state.token + dateTime);
                 commit(types.VX_CONTINUE_TOKEN, data);
+                resolve();
             });
         },
         [types.VX_SIGN_OUT]: ({commit}) => {

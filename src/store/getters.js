@@ -5,7 +5,8 @@ export const getters = {
     getLastActionTimeCrypt: state => state.auth.lastActionTimeCrypt,
     // menu
     getMenuList: state => state.menu.menuList,
-    getAllPermissionRouterList: state => state.menu.allPermissionRouterList,
+    getAsyncPermissionRouterList: state => state.menu.asyncPermissionRouterList,
+    allPermissionRouterList: state => state.menu.allPermissionRouterList,
     // app
     getSidebarOpened: state => state.app.isOpened,
 

@@ -21,27 +21,24 @@ const whiteList = ['/signIn', '/authredirect', '/reset', '/sendpwd'];// 不重�
 router.beforeEach((to, from, next) => {
     NProgress.start(); // 开启Progress
 
-    let isValidToken = verifyToken(store.getters.getToken,
+    let token = store.getters.getToken;
+    let isValidToken = verifyToken(token,
                             store.getters.getLastActionTime,
                             store.getters.getLastActionTimeCrypt);
-    console.log('to', to);
+
     // 登录 并且 未超时
-    if (store.getters.getToken && isValidToken) { // 判断是否有token 并且 token有效
+    if (token && isValidToken) { // 判断是否有token 并且 token有效
         store.dispatch('VX_CONTINUE_TOKEN'); // 刷新token时间
         if (to.path === '/signIn' || to.path === '/signUp') {
             next({ path: '/' });
         } else {
             // 页面刷新 或 通过地址栏直接访问url
             let menuList = store.getters.getMenuList;
-            // console.log('menuList1',menuList);
             if(!(menuList instanceof Array) || menuList.length === 0) { // 在VUEX中，没有持久化的后台菜单
-                // console.log('menuList2',menuList);
                 store.dispatch('VX_GET_MENU', store.getters.getToken).then(() => {
-                    // menuList = store.getters.getMenuList;
-                    console.log('getAllPermissionRouterList', store.getters.getAllPermissionRouterList);
-                    router.addRoutes(store.getters.getAllPermissionRouterList); // 动态添加可访问路由表
-                    console.log('added routers');
+                    router.addRoutes(store.getters.getAsyncPermissionRouterList); // 动态添加可访问路由表
                     next({ ...to });
+                    // next({ path: '/' });
                 }).catch(() => {
                     store.dispatch('VX_SIGN_OUT').then(() => {
                         next({path:'/signIn'});
@@ -52,7 +49,6 @@ router.beforeEach((to, from, next) => {
             }
         }
     } else {
-        console.log('过期');
         if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
             next();
         } else {
@@ -64,8 +60,8 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach((to, from, next) => {
     // 设置 title
-    let title = to.meta.title;
-    document.title = 'vue2-template' + (title ? '-'+title : '');
+    // let title = to.meta.title;
+    // document.title = 'vue2-template' + (title ? '-'+title : '');
 
     NProgress.done(); // 结束Progress
 });
