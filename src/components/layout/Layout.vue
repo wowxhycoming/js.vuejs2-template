@@ -3,23 +3,21 @@
         <Sidebar class="sidebar-container"></Sidebar>
         <div class="main-container">
             <Navbar></Navbar>
-            <!--<app-main></app-main>-->
-            <router-view></router-view>
+            <app-main></app-main>
         </div>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex';
-    import {Sidebar, /*Navbar, AppMain*/} from '@/components/layout';
-    import Navbar from './Navbar';
+    import {Sidebar, Navbar, AppMain} from '@/components/layout';
 
     export default {
         name: 'layout',
         components: {
             Sidebar,
             Navbar,
-//            AppMain
+            AppMain
         },
         computed: {
             ...mapGetters(['getSidebarOpened']),
