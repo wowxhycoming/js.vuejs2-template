@@ -28,12 +28,14 @@ export const asyncRouterMap = [
         redirect: '/a/index',
         name: 'A',
         displayName: '权限测试A',
+        icon: 'icon-all',
         noDropdown: true,
         children: [{
             path: 'index',
             component: importComponent('test/a/index'),
             name: 'A-index',
             displayName: '权限测试A-index',
+            icon: 'icon-all',
         }]
     },
     {
@@ -42,10 +44,11 @@ export const asyncRouterMap = [
         redirect: '/b/index',
         name: 'B',
         displayName: '权限测试B',
+        icon: 'icon-all',
         children: [
-            {path: 'index', component: importComponent('test/b/index'), name: 'B-index', displayName: '权限测试B-index',},
-            {path: 'b1', component: importComponent('test/b/b1'), name: 'B-b1', displayName: '权限测试B-b1'},
-            {path: 'b2', component: importComponent('test/b/b2'), name: 'B-b2', displayName: '权限测试B-b2',}
+            {path: 'index', component: importComponent('test/b/index'), name: 'B-index', displayName: '权限测试B-index', icon: 'icon-all',},
+            {path: 'b1', component: importComponent('test/b/b1'), name: 'B-b1', displayName: '权限测试B-b1',icon: 'icon-all',},
+            {path: 'b2', component: importComponent('test/b/b2'), name: 'B-b2', displayName: '权限测试B-b2',icon: 'icon-all',}
         ]
     },
     {
@@ -54,15 +57,16 @@ export const asyncRouterMap = [
         // redirect: 'noredirect',
         name: 'C',
         displayName: '权限测试C',
+        icon: 'icon-all',
         children: [
-            {path: '/c/index', component: importComponent('test/c/index'), name: 'C-index', displayName: '权限测试C-index',
+            {path: '/c/index', component: importComponent('test/c/index'), name: 'C-index', displayName: '权限测试C-index',icon: 'icon-all',
                 children: [
-                    {path: 'c11', component: importComponent('test/c/indexc1'), name: 'C-index-c1', displayName: '权限测试C-index-c1'},
-                    {path: 'c12', component: importComponent('test/c/indexc2'), name: 'C-index-c2', displayName: '权限测试C-index-c2'},
+                    {path: 'c11', component: importComponent('test/c/indexc1'), name: 'C-index-c1', displayName: '权限测试C-index-c1',icon: 'icon-all',},
+                    {path: 'c12', component: importComponent('test/c/indexc2'), name: 'C-index-c2', displayName: '权限测试C-index-c2',icon: 'icon-all',},
                 ]
             },
-            {path: 'c1', component: importComponent('test/c/c1'), name: 'C-c1', displayName: '权限测试C-c1',},
-            {path: 'c2', component: importComponent('test/c/c2'), name: 'C-c2', displayName: '权限测试C-c1',}
+            {path: 'c1', component: importComponent('test/c/c1'), name: 'C-c1', displayName: '权限测试C-c1',icon: 'icon-all',},
+            {path: 'c2', component: importComponent('test/c/c2'), name: 'C-c2', displayName: '权限测试C-c1',icon: 'icon-all',}
         ]
     }
 ];
