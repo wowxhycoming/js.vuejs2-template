@@ -4,26 +4,26 @@
         <levelbar></levelbar>
         <tabs-view></tabs-view>
         <!--<error-log v-if="log.length>0" class="errLog-container" :logsList="log"></error-log>-->
-        <!--<screenfull class='screenfull'></screenfull>-->
-        <!--<el-dropdown class="avatar-container" trigger="click">-->
-            <!--<div class="avatar-wrapper">-->
-                <!--<img class="user-avatar" :src="avatar+'?imageView2/1/w/80/h/80'">-->
-                <!--<i class="el-icon-caret-bottom"></i>-->
-            <!--</div>-->
-            <!--<el-dropdown-menu class="user-dropdown" slot="dropdown">-->
-                <!--<router-link class='inlineBlock' to="/">-->
+        <screenfull class='screenfull'></screenfull>
+        <el-dropdown class="avatar-container" trigger="click">
+            <div class="avatar-wrapper">
+                <img class="user-avatar" :src="getAvatar">
+                <i class="el-icon-caret-bottom"></i>
+            </div>
+            <el-dropdown-menu class="user-dropdown" slot="dropdown">
+                <router-link class='inlineBlock' to="/">
+                    <el-dropdown-item>
+                        首页
+                    </el-dropdown-item>
+                </router-link>
+                <!--<a target='_blank' href="https://">-->
                     <!--<el-dropdown-item>-->
-                        <!--首页-->
-                    <!--</el-dropdown-item>-->
-                <!--</router-link>-->
-                <!--<a target='_blank' href="https://github.com/PanJiaChen/vue-element-admin/">-->
-                    <!--<el-dropdown-item>-->
-                        <!--项目地址-->
+                        <!--其他外链-->
                     <!--</el-dropdown-item>-->
                 <!--</a>-->
-                <!--<el-dropdown-item divided><span @click="logout" style="display:block;">退出登录</span></el-dropdown-item>-->
-            <!--</el-dropdown-menu>-->
-        <!--</el-dropdown>-->
+                <el-dropdown-item divided><span @click="signOut" style="display:block;">退出登录</span></el-dropdown-item>
+            </el-dropdown-menu>
+        </el-dropdown>
     </el-menu>
 </template>
 
@@ -32,7 +32,7 @@
     import Hamburger from './Hamburger';
     import Levelbar from './Levelbar';
     import TabsView from './TabsView'
-//    import Screenfull from 'components/Screenfull'
+    import Screenfull from './Screenfull'
 //    import ErrorLog from 'components/ErrLog'
 //    import errLogStore from 'store/errLog'
 
@@ -41,8 +41,8 @@
             Hamburger,
             Levelbar,
             TabsView,
-//            ErrorLog,
-//            Screenfull
+            Screenfull,
+//            ErrorLog
         },
         data() {
             return {
@@ -50,15 +50,18 @@
             }
         },
         computed: {
-            ...mapGetters(['getSidebarOpened']),
+            ...mapGetters(['getSidebarOpened', 'getAvatar']),
         },
         methods: {
             toggleSideBar() {
                 this.$store.dispatch('VX_SIDERBAR_TOGGLE');
             },
-            logout() {
-                this.$store.dispatch('LogOut').then(() => {
+            signOut() {
+                this.$store.dispatch('VX_SIGN_OUT').then((res) => {
+                    console.log('sign out res', res);
                     location.reload()// 为了重新实例化vue-router对象 避免bug
+                }).catch(err => {
+                    console.log(err);
                 })
             }
         }

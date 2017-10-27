@@ -20,3 +20,10 @@ export function getMenuList(token) {
 
     return axios.post(domain + '/auth/getMenuList', data);
 }
+
+export function signOut(token) {
+    const data = {token};
+    console.log('api signOut', data);
+
+    return axios.post(domain + '/auth/signOut', data);
+}
