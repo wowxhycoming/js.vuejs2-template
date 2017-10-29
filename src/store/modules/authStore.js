@@ -33,12 +33,12 @@ const auth = {
                 });
             });
         },
-        [types.VX_CONTINUE_TOKEN]: ({commit}) => {
+        [types.VX_CONTINUE_TOKEN]: ({commit,state}) => {
             return new Promise(resolve => {
                 const data = {};
                 let dateTime = new Date().toISOString();
                 data.lastActionTime = dateTime;
-                data.lastActionTimeCrypt = cryptLastActionTime(auth.state.token + dateTime);
+                data.lastActionTimeCrypt = cryptLastActionTime(state.token + dateTime);
                 commit(types.VX_CONTINUE_TOKEN, data);
                 resolve();
             });
