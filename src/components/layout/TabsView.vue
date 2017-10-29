@@ -3,7 +3,6 @@
         <router-link class="tabs-view" v-for="tag in Array.from(visitedViews)" :to="tag.path" :key="tag.path">
             <el-tag :closable="true" :type="isActive(tag.path)?'primary':''" @close='closeViewTabs(tag,$event)'>
                 {{tag.name}}
-
             </el-tag>
         </router-link>
     </div>
@@ -18,6 +17,7 @@
         },
         methods: {
             closeViewTabs(view, $event) {
+                console.log('close view tabs');
                 this.$store.dispatch('VX_DEL_VISITED_VIEW', view).then((views) => {
                     if(this.isActive(view.path)) {
                         const latestView = views.slice(-1)[0]

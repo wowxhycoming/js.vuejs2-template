@@ -10,12 +10,11 @@ const sidebar = {
             commit(types.VX_SIDERBAR_TOGGLE);
         },
         [types.VX_ADD_VISITED_VIEW]: ({commit}, view) => {
-            console.log('VX_ADD_VISITED_VIEW view', view);
             commit(types.VX_ADD_VISITED_VIEW, view);
         },
         [types.VX_DEL_VISITED_VIEW]: ({commit, state}, view) => {
             return new Promise((resolve) => {
-                commit('DEL_VISITED_VIEWS', view)
+                commit(types.VX_DEL_VISITED_VIEW, view)
                 resolve([...state.visitedViews])
             })
         }
