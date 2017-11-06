@@ -8,7 +8,7 @@ Vue.use(Router);
 
 
 export const constantRouterMap = [
-    {path: '/signIn', component: importComponent('signIn/index'), hidden: true},
+    {path: '/signin', component: importComponent('signin/index'), hidden: true},
     {path: '/test', component: importComponent('test/test'), hidden: true},
     {
         path: '/',

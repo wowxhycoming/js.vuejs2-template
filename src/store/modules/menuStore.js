@@ -1,5 +1,5 @@
 import types from '../types';
-import {signIn, getMenuList} from '@/api/authApi';
+import {signin, getMenuList} from '@/api/authApi';
 import {constantRouterMap, asyncRouterMap, notFoundRouterMap} from '@/router';
 import {levelMatch,verifyToken} from '@/utils';
 

@@ -1,5 +1,5 @@
 import types from '../types';
-import {signIn, getMenuList, signOut} from '@/api/authApi';
+import {signin, getMenuList, signOut} from '@/api/authApi';
 import {cryptLastActionTime} from '@/utils';
 
 const auth = {
@@ -18,7 +18,7 @@ const auth = {
             const dateTime = new Date().toISOString();
 
             return new Promise((resolve, reject) => {
-                signIn(username, password).then(res => {
+                signin(username, password).then(res => {
                     console.log('res.data===============', res.data);
                     const data = res.data;
                     data.lastActionTime = dateTime;

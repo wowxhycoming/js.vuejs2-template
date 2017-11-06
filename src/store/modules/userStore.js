@@ -1,5 +1,5 @@
 import types from '../types';
-// import {signIn, verifyToken} from '../../api/userApi';
+// import {signin, verifyToken} from '../../api/userApi';
 // import {getToken, setToken, removeToken} from '../../utils/auth';
 
 const user = {
@@ -17,7 +17,7 @@ const user = {
 
             return new Promise((resolve, reject) => {
                 // 验证用户
-                // signIn(paramUser).then(res => {
+                // signin(paramUser).then(res => {
                 //     console.log('===user action then===', res);
                 //
                 //     let retUser = res.data;

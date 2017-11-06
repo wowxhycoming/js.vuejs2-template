@@ -4,14 +4,14 @@ let mock = 'http://localhost:4000';
 
 let domain = mock;
 
-export function signIn(username, password) {
+export function signin(username, password) {
     const data = {
         username,
         password
     };
-    console.log('api signIn', data);
+    console.log('api signin', data);
 
-    return axios.post(domain + '/auth/signIn', data);
+    return axios.post(domain + '/auth/signin', data);
 }
 
 export function getMenuList(token) {

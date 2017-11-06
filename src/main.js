@@ -16,7 +16,7 @@ Vue.prototype.$http = axios;
 Vue.use(ElementUI);
 Vue.use(waves);
 
-const whiteList = ['/signIn', '/authredirect', '/reset', '/sendpwd'];// 不重定向白名单
+const whiteList = ['/signin', '/authredirect', '/reset', '/sendpwd'];// 不重定向白名单
 // 都放到 store 中， 在 beforeEach 中判断和更新 store 中数据->根据当前时间设置超时时间
 router.beforeEach((to, from, next) => {
     console.log('beforeEach', to.path);
@@ -31,8 +31,8 @@ router.beforeEach((to, from, next) => {
     if (token && isValidToken) { // 判断是否有token 并且 token有效
         console.log('token && isValidToken', to.path);
         store.dispatch('VX_CONTINUE_TOKEN'); // 刷新token时间
-        if (to.path === '/signIn' || to.path === '/signUp') {
-            console.log('redirect signIn Up', to.path);
+        if (to.path === '/signin' || to.path === '/signUp') {
+            console.log('redirect signin Up', to.path);
             next({ path: '/' });
         } else {
             console.log('perhaps go to', to.path);
@@ -46,7 +46,7 @@ router.beforeEach((to, from, next) => {
                     // next({ path: '/' });
                 }).catch(() => {
                     store.dispatch('VX_SIGN_OUT').then(() => {
-                        next({path:'/signIn'});
+                        next({path:'/signin'});
                     });
                 });
             } else {
@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
             next();
         } else {
             console.log('blackList', to.path);
-            next('/signIn'); // 否则全部重定向到登录页
+            next('/signin'); // 否则全部重定向到登录页
             NProgress.done(); // 在hash模式下 改变手动改变hash 重定向回来 不会触发afterEach 暂时hack方案 ps：history模式下无问题，可删除该行！
         }
     }

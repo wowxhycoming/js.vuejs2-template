@@ -20,7 +20,7 @@
                 <el-input name="password" :type="pwdType" @keyup.enter.native="handleLogin" v-model="loginForm.password"
                           autoComplete="on"
                           placeholder="密码"/>
-                <span class='show-pwd' @click='showPwd'><i class="iconfont icon-all" style="font-size: 30px;"></i></span>
+                <span class='inline-el-form-item' @click='showPwd'><i class="iconfont icon-all" style="font-size: 30px;"></i></span>
             </el-form-item>
 
             <el-button v-waves type="primary" style="width:100%;margin-bottom:30px;" :loading="loading"
@@ -160,7 +160,7 @@
             border-radius: 5px;
             color: #454545;
         }
-        .show-pwd {
+        .inline-el-form-item {
             position: absolute;
             right: 10px;
             top: 7px;
