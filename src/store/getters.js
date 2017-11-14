@@ -7,7 +7,7 @@ export const getters = {
     // menu
     getMenuList: state => state.menu.menuList,
     getAsyncPermissionRouterList: state => state.menu.asyncPermissionRouterList,
-    allPermissionRouterList: state => state.menu.allPermissionRouterList,
+    getAllPermissionRouterList: state => state.menu.allPermissionRouterList,
     // app
     getSidebarOpened: state => state.app.isOpened,
 

@@ -22,6 +22,7 @@ export const constantRouterMap = [
 ];
 
 export const asyncRouterMap = [
+    // 如果一个路由包含子路由，那么这个路由的 redirect 必须要使用绝对路径 -> 以 '/' 开头
     {
         path: '/a',
         component: Layout,
