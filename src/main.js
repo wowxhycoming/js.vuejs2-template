@@ -39,7 +39,8 @@ router.beforeEach((to, from, next) => {
             // 页面刷新 或 通过地址栏直接访问url
             let menuList = store.getters.getMenuList;
             let asyncPermissionRouterList = store.getters.getAsyncPermissionRouterList;
-            if(!(menuList instanceof Array) || menuList.length === 0 && asyncPermissionRouterList.length === 0) { // 在VUEX中，没有持久化的后台菜单
+            if((!(menuList instanceof Array) || menuList.length === 0) && asyncPermissionRouterList.length === 0) {
+                // ↑ 在VUEX中，没有持久化的后台菜单 && 没有权限菜单
                 console.log('reload menu', to.path);
                 store.dispatch('VX_GET_MENU', store.getters.getToken).then(() => {
                     router.addRoutes(store.getters.getAsyncPermissionRouterList); // 动态添加可访问路由表
